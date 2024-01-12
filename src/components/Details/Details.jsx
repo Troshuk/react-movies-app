@@ -105,12 +105,12 @@ export const Details = () => {
               <Routes>
                 <Route path={MOVIE_CAST_ROUTE} element={<Cast />} />
                 <Route path={MOVIE_REVIEWS_ROUTE} element={<Reviews />} />
-                <Route
+                {/* <Route
                   path="*"
                   element={
                     <Navigate to={MOVIE_DETAILS_ROUTE.replace(':id', id)} />
                   }
-                />
+                /> */}
               </Routes>
             </Suspense>
           </div>
