@@ -1,0 +1,24 @@
+.castList {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-around;
+}
+
+.castList li {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 200px;
+    justify-content: space-between;
+}
+
+.castList h3 {
+    font-style: italic;
+}
+
+.castList h4 {
+    background-color: orange;
+    border-radius: 20px;
+}

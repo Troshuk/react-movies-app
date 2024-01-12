@@ -1,0 +1,25 @@
+.container {
+    margin-top: 20px;
+}
+
+.list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: space-around;
+}
+
+.list li {
+    max-width: 400px;
+    text-align: start;
+    background-color: burlywood;
+    padding: 20px;
+    border-radius: 20px;
+    max-height: 400px;
+    overflow: scroll;
+}
+
+.list h3 {
+    margin-bottom: 10px;
+    color: #7e3400;
+}

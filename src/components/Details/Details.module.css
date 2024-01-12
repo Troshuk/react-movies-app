@@ -1,0 +1,63 @@
+.goBack {
+    background-color: teal;
+    color: white;
+    font-weight: 800;
+    font-size: 18px;
+    padding: 5px 10px;
+    display: flex;
+    width: 100px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.container {
+    padding: 30px;
+    margin-top: 30px;
+    display: flex;
+    gap: 30px;
+    background-color: antiquewhite;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    color: whitesmoke;
+    min-height: 600px;
+    align-items: center;
+}
+
+.container img {
+    height: 100%;
+}
+
+.detailsContainer {
+    padding-top: 20px;
+    max-width: 800px;
+}
+
+.text {
+    font-style: italic;
+    font-size: 18px;
+}
+
+/* Additional information */
+.additionalContainer {
+    padding: 30px;
+    margin-top: 20px;
+    background-color: antiquewhite;
+    text-align: center;
+}
+
+.additionalButtons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.additionalButtons a {
+    background-color: chocolate;
+    padding: 10px 5px;
+    color: white;
+    border-radius: 20px;
+    width: 100px;
+    text-align: center;
+}

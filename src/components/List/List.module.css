@@ -1,0 +1,29 @@
+.list {
+    margin-top: 50px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-around;
+}
+
+.list a {
+    background-color: bisque;
+    padding: 10px;
+    border-radius: 20px;
+    max-width: 100%;
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.list a img {
+    border-radius: 20px;
+    height: 300px;
+}
+
+.list a p {
+    margin-top: 10px;
+    font-weight: 700;
+    text-align: center;
+}
