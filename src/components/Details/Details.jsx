@@ -29,6 +29,7 @@ export const Details = () => {
   const { id } = useParams();
   const score = (movie?.vote_average * 10)?.toFixed(0) ?? 0;
   const goBackRoute = location.state?.from ?? HOME_ROUTE;
+  const currentRoute = MOVIE_DETAILS_ROUTE.replace(':id', id);
 
   useEffect(() => {
     if (!id) return;
@@ -105,12 +106,22 @@ export const Details = () => {
               <Routes>
                 <Route path={MOVIE_CAST_ROUTE} element={<Cast />} />
                 <Route path={MOVIE_REVIEWS_ROUTE} element={<Reviews />} />
-                {/* <Route
-                  path="*"
+                <Route
+                  path={MOVIE_CAST_ROUTE + '/*'}
+                  element={<Navigate to={currentRoute} />}
+                />
+                <Route
+                  path={MOVIE_REVIEWS_ROUTE + '/*'}
+                  element={<Navigate to={currentRoute} />}
+                />
+                <Route
+                  path={'/*'}
                   element={
-                    <Navigate to={MOVIE_DETAILS_ROUTE.replace(':id', id)} />
+                    location.pathname !== currentRoute && (
+                      <Navigate to={currentRoute} />
+                    )
                   }
-                /> */}
+                />
               </Routes>
             </Suspense>
           </div>
