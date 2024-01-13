@@ -19,17 +19,19 @@ import 'react-circular-progressbar/dist/styles.css';
 export const Details = () => {
   const location = useLocation();
   const goBackRoute = useRef(location.state?.from ?? HOME_ROUTE);
+  const hasMovieLoaded = useRef(false);
   const [movie, setMovie] = useState(null);
   const navigate = useNavigate();
   const { id } = useParams();
   const score = (movie?.vote_average * 10)?.toFixed(0) ?? 0;
 
   useEffect(() => {
-    if (!id) return;
+    if (!id || hasMovieLoaded.current) return;
 
     getMovieDetails(id)
       .then(setMovie)
-      .catch(() => navigate(goBackRoute.current));
+      .catch(() => navigate(goBackRoute.current))
+      .finally(() => hasMovieLoaded.current = true);
   }, [id, navigate]);
 
   return (
