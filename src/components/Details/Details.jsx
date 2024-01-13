@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { Suspense, useEffect, useRef, useState } from 'react';
 import {
   Link,
   useLocation,
@@ -16,6 +16,7 @@ import { MOVIE_CAST_ROUTE, MOVIE_REVIEWS_ROUTE } from 'routes/routes';
 import css from './Details.module.css';
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
+import { Loader } from 'components/Loader/Loader';
 
 export const Details = () => {
   const location = useLocation();
@@ -101,7 +102,9 @@ export const Details = () => {
             </ul>
 
             {/* Additional information is rendered here */}
-            <Outlet />
+            <Suspense fallback={<Loader />}>
+              <Outlet />
+            </Suspense>
           </div>
         </>
       )}
