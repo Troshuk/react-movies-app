@@ -53,11 +53,15 @@
     gap: 10px;
 }
 
+.additionalButtons :global(.active) {
+    background-color: orange;
+}
+
 .additionalButtons a {
-    background-color: chocolate;
     padding: 10px 5px;
-    color: white;
     border-radius: 20px;
     width: 100px;
     text-align: center;
+    color: black;
+    background-color: white;
 }

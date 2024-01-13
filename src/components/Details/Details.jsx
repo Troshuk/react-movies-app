@@ -5,6 +5,7 @@ import {
   useParams,
   useNavigate,
   Outlet,
+  NavLink,
 } from 'react-router-dom';
 
 import { HOME_ROUTE } from 'routes/routes';
@@ -31,7 +32,7 @@ export const Details = () => {
     getMovieDetails(id)
       .then(setMovie)
       .catch(() => navigate(goBackRoute.current))
-      .finally(() => hasMovieLoaded.current = true);
+      .finally(() => (hasMovieLoaded.current = true));
   }, [id, navigate]);
 
   return (
@@ -95,8 +96,8 @@ export const Details = () => {
             <h2>Additional Information</h2>
 
             <ul className={css.additionalButtons}>
-              <Link to={MOVIE_CAST_ROUTE}>Cast</Link>
-              <Link to={MOVIE_REVIEWS_ROUTE}>Reviews</Link>
+              <NavLink to={MOVIE_CAST_ROUTE}>Cast</NavLink>
+              <NavLink to={MOVIE_REVIEWS_ROUTE}>Reviews</NavLink>
             </ul>
 
             {/* Additional information is rendered here */}
