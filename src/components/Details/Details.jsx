@@ -1,47 +1,40 @@
-import { Suspense, lazy, useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import {
   Link,
-  Navigate,
-  Route,
-  Routes,
   useLocation,
   useParams,
   useNavigate,
+  Outlet,
 } from 'react-router-dom';
 
-import { HOME_ROUTE, MOVIE_DETAILS_ROUTE } from 'routes/routes';
+import { HOME_ROUTE } from 'routes/routes';
 import { getMovieDetails, getImage } from 'services/MoviesDbApi';
 import { BiArrowBack } from 'react-icons/bi';
 import { MOVIE_CAST_ROUTE, MOVIE_REVIEWS_ROUTE } from 'routes/routes';
 
 import css from './Details.module.css';
-import { Loader } from 'components/Loader/Loader';
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 
-const Cast = lazy(() => import('components/Cast/Cast'));
-const Reviews = lazy(() => import('components/Reviews/Reviews'));
-
 export const Details = () => {
   const location = useLocation();
+  const goBackRoute = useRef(location.state?.from ?? HOME_ROUTE);
   const [movie, setMovie] = useState(null);
   const navigate = useNavigate();
   const { id } = useParams();
   const score = (movie?.vote_average * 10)?.toFixed(0) ?? 0;
-  const goBackRoute = location.state?.from ?? HOME_ROUTE;
-  const currentRoute = MOVIE_DETAILS_ROUTE.replace(':id', id);
 
   useEffect(() => {
     if (!id) return;
 
     getMovieDetails(id)
       .then(setMovie)
-      .catch(() => navigate(goBackRoute));
-  }, [id, navigate, goBackRoute]);
+      .catch(() => navigate(goBackRoute.current));
+  }, [id, navigate]);
 
   return (
     <div>
-      <Link className={css.goBack} to={goBackRoute}>
+      <Link className={css.goBack} to={goBackRoute.current}>
         <BiArrowBack /> Go Back
       </Link>
 
@@ -49,11 +42,13 @@ export const Details = () => {
         <>
           <div
             className={css.container}
-            style={{
-              backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.8) ,rgba(0, 0, 0, 0.3)), url(${getImage(
-                movie.backdrop_path
-              )})`,
-            }}
+            style={
+              movie.backdrop_path && {
+                backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.8) ,rgba(0, 0, 0, 0.3)), url(${getImage(
+                  movie.backdrop_path
+                )})`,
+              }
+            }
           >
             <img
               src={getImage(movie.poster_path, 'w300')}
@@ -102,28 +97,8 @@ export const Details = () => {
               <Link to={MOVIE_REVIEWS_ROUTE}>Reviews</Link>
             </ul>
 
-            <Suspense fallback={<Loader />}>
-              <Routes>
-                <Route path={MOVIE_CAST_ROUTE} element={<Cast />} />
-                <Route path={MOVIE_REVIEWS_ROUTE} element={<Reviews />} />
-                <Route
-                  path={MOVIE_CAST_ROUTE + '/*'}
-                  element={<Navigate to={currentRoute} />}
-                />
-                <Route
-                  path={MOVIE_REVIEWS_ROUTE + '/*'}
-                  element={<Navigate to={currentRoute} />}
-                />
-                <Route
-                  path={'/*'}
-                  element={
-                    location.pathname !== currentRoute && (
-                      <Navigate to={currentRoute} />
-                    )
-                  }
-                />
-              </Routes>
-            </Suspense>
+            {/* Additional information is rendered here */}
+            <Outlet />
           </div>
         </>
       )}
