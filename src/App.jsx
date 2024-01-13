@@ -34,7 +34,7 @@ export const App = () => {
               <Route path={MOVIE_CAST_ROUTE} element={<Cast />} />
               <Route path={MOVIE_REVIEWS_ROUTE} element={<Reviews />} />
             </Route>
-            <Route path="*" element={<Navigate to="/" />} />
+            <Route path="*" element={<Navigate to={HOME_ROUTE} />} />
           </Routes>
         </Suspense>
       </main>
