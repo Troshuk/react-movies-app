@@ -6,14 +6,16 @@ const Movies = () => {
   const [serchParams, setSearchParams] = useSearchParams();
   const query = serchParams.get('query')?.trim() ?? '';
 
-  const handleSumbit = query => {
-    if (!query) {
+  const handleSumbit = newQuery => {
+    if (!newQuery) {
       setSearchParams({});
 
       return;
     }
 
-    setSearchParams({ query });
+    if (query === newQuery) return;
+
+    setSearchParams({ query: newQuery });
   };
 
   return (
